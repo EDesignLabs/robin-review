@@ -1,0 +1,14 @@
+<template name="lobby">
+  <h1>Welcome {{username}}!</h1>
+
+  	<ul>
+		{{#each users}}
+          <tr>
+            <td>{{name}}</td>
+            <td>{{members}}</td>
+            <td>{{last_activity}}</td>
+          </tr>
+        {{/each}}
+    <ul>
+  
+</template>
