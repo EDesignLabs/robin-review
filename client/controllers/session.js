@@ -1,15 +1,18 @@
+
+
 var t = Template.session
 
 t.helpers({
-  username: function(){return Session.get('username')}
+	username: function(){return Session.get('username')},
+	structures: function(){return Structures.find({sessionSlug: Session.get("sessionSlug")});},
+	sessionSlug:function(){return Session.get("sessionSlug") || false;}
 })
 
 t.events = {
 	"click #load": function (){
-		var roomName = window.prompt("Name the room", "My room") || "Anonymous Room";
-		if(roomName) {
-			Rooms.insert({"name": roomName});
-		}
+		Session.set('sessionSlug', 'bob')
+		Structures.insert({"name": 'test', 'sessionSlug':'bob'});
+		console.log('test')
 	}
 };
 

@@ -1,9 +1,11 @@
 <template name="session">
 	session
 
+	<button id="load">LOAD</button>
+
 	<ul>
-		{{#each users}}
-		<li></li>
+		{{#each structures}}
+		<li>{{name}}</li>
 		{{/each}}
 	</ul>
   
