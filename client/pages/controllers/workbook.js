@@ -1,19 +1,22 @@
 
 
-var t = Template.session
+var t = Template.workbook
 
 t.helpers({
-	username: function(){return Session.get('username')},
-	structures: function(){return Structures.find({sessionSlug: Session.get("sessionSlug")});},
-	sessionSlug:function(){return Session.get("sessionSlug") || false;}
+	structures: function(){return Structures.find({workbookSlug: Session.get("workbookSlug")});},
+	workbookSlug: function(){return Session.get('workbookSlug')}
 })
 
 t.events = {
 	"click #load": function (){
-		Session.set('sessionSlug', 'bob')
-		Structures.insert({"name": 'test', 'sessionSlug':'bob'});
-		console.log('test')
+		Session.set('workbookSlug', $('input').val())
+		Structures.insert({name: 'test', workbookSlug:$('input').val()});
+	},
+	"click #add": function(){
+		Meteor.Router.to('/workbook/structure');
 	}
+
+	
 };
 
 

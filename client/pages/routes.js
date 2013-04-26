@@ -1,6 +1,6 @@
 Meteor.Router.add({
-	'/session': function(id) {
-      return 'session';
+	'/workbook': function(id) {
+      return 'workbook';
     },
     '/join/:id': function(id) {
       Session.set('currentRoomId', id);
@@ -13,5 +13,7 @@ Meteor.Router.add({
     	else
     		window.location = "/join/"+id //not ideal but it will do
     },
+    '/workbook/structure': function(){ return 'workbookStructure'},
+    
     '*': '404'
 });

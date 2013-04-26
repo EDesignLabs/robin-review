@@ -1,0 +1,19 @@
+<template name="workbook">
+	workbook name:
+
+	<input type="text"><button id="load">LOAD</button>
+
+	{{#if workbookSlug}}
+		<hr>
+		<button id="add">add</button>
+		<hr>
+		{{workbookSlug}}
+
+		<ul>
+			{{#each structures}}
+				<li>{{name}}</li>
+			{{/each}}
+		</ul>
+	{{/if}}
+  
+</template>
