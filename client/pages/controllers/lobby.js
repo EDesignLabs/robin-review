@@ -11,17 +11,14 @@ t.events({
 		Users.remove({_id:this._id})
 	},
 	"click button#start":function(){
-		console.log('start')
+		
 		Users.update(
 		   {_id:Session.get('userId')},
 		   {
-		     $set: { 'hasStarted': true },
+		     $set: { 'roomStatus': 'start' },
 		   }
 		)
 
-
-
-		console.log(Session.get('userId'))
 	}
 })
 
