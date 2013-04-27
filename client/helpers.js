@@ -1,12 +1,14 @@
-Handlebars.registerHelper('arrayify',function(obj){
-    result = [];
-    for (var key in obj) result.push({name:key,value:obj[key]});
-    return result;
-});
+for (var t in Template){
+	Session.get('structureId')
 
-Handlebars.registerHelper('json', function(context) {
-    return JSON.stringify(context);
-});
+    Template[t].helpers(
+    	{
+    		structure:function(){
+    			return Structures.findOne({_id:Session.get('structureId')})
+    		}
+    	}
+    )
+}
 
 
 Template.helpers = {
@@ -29,13 +31,3 @@ Template.helpers = {
 	}
 }
 
-for (var t in Template){
-	Session.get('structureId')
-    Template[t].helpers(
-    	{
-    		structure:function(){
-    			return Structures.findOne({_id:Session.get('structureId')})
-    		}
-    	}
-    )
-}

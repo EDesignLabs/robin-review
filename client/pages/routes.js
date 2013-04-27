@@ -7,10 +7,10 @@ Meteor.Router.add({
       return 'join';
     },
     '/lobby/:id': function(id){
-    	console.log(Session.get('currentRoomId'))
-    	if (Session.get('currentRoomId'))
+    	if (Session.get('currentRoomId')){
+            
     		return 'lobby'
-    	else
+    	}else
     		window.location = "/join/"+id //not ideal but it will do
     },
     '/workbook/structure': function(){ return 'workbookStructure'},

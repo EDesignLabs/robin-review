@@ -1,14 +1,20 @@
 <template name="lobby">
-  <h1>Welcome {{username}}!</h1>
+  <h1>Welcome {{user.name}}!</h1>
 
-  	<ul>
-		{{#each users}}
-          <tr>
-            <td>{{name}}</td>
-            <td>{{members}}</td>
-            <td>{{last_activity}}</td>
-          </tr>
-        {{/each}}
-    <ul>
+	<ul>
+	  {{#each users}}
+        <li >  
+          {{#if isAdmin }}<i class="icon-flag"></i>{{/if}}
+          {{name}}
+          {{#if user.isAdmin }}{{#unless isAdmin }}<button class ="boot">boot</button>{{/unless}}{{/if}}
+        </li>
+    {{/each}}
+  </ul>
+
+  {{#if user.isAdmin }}
+    <button id ="start">Start</button>
+  {{/if}}
+  
+  
   
 </template>
