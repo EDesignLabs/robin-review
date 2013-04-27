@@ -1,8 +1,10 @@
-var structure = Template.commentStructure
 
-structure.events = {
+Template.commentStructure.events = {
 	"click button": function (event){
-		Session.get('workbookSlug');
-		Meteor.Router.to('/workbook');
+		Template.helpers.addStructuredActivity({
+			highlight: $('input#highlight').val(),
+			question: $('input#question').val()
+		})
+		
 	}
 };

@@ -1,13 +1,18 @@
 <template name="workbookStructure">
-	{{#constant}}
-		<select>
-			<option value="" style="display:none;"></option>
-			{{#each activities}}
-				<option value="{{key}}">{{value}}</option>
-			{{/each}}
-		</select>
-	{{/constant}}
 
-	{{{currentStructure}}}
+	{{#unless structureId}}
+		{{#constant}}
+			<select>
+				<option value="" style="display:none;"></option>
+				{{#each activities}}
+					<option value="{{key}}">{{value}}</option>
+				{{/each}}
+			</select>
+		{{/constant}}
+	{{/unless}}
+
+	{{{structureTemplate}}}
+
 
 </template>
+

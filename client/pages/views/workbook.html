@@ -7,11 +7,17 @@
 		<hr>
 		<button id="add">add</button>
 		<hr>
-		{{workbookSlug}}
+		{{workbookSlug }}
 
 		<ul>
 			{{#each structures}}
-				<li>{{name}}</li>
+				<li>
+					{{prettyPrintStructure structureSlug}} 
+					<button class = "edit" data-id = "{{_id}}">edit</button>
+					<button class = "remove" data-id = "{{_id}}">x</button>
+					-
+					{{json this}}
+				</li>
 			{{/each}}
 		</ul>
 	{{/if}}
