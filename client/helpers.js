@@ -79,7 +79,18 @@ Helpers = {
 
     Meteor.call("addActivitySet", settings, Template.join.user())
 
+    Helpers.loop()
+
+  },
+  completeActivity:function(result){
+
+    result.completorId = Template.loop.user()._id
+    _.extend(Helpers.currentActivity, {result : result});
     
+    Users.update(
+      { _id:Helpers.currentActivity.creatorId},
+      { $push: { todosComplete: Helpers.currentActivity }}
+    )
 
     Helpers.loop()
 

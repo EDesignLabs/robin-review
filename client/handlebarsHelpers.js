@@ -9,3 +9,12 @@ Handlebars.registerHelper('arrayify',function(obj){
 Handlebars.registerHelper('json', function(context) {
     return JSON.stringify(context);
 });
+
+
+ Handlebars.registerHelper('dynamicResultTemplate', function(name, context, options) {
+	name = name + "Result"
+	if (Template[name])
+		return new Handlebars.SafeString(Template[name](context));
+
+	return "Temple not found";
+ });

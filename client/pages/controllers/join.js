@@ -10,12 +10,6 @@ t.events({
 
 	var query = Users.find({roomId:Session.get('currentRoomId'), isAdmin:true});
 	var handle = query.observeChanges({
-	  added: function (id, obj) {
-	    //console.log('added')
-	  },
-	  removed: function () {
-	    
-	  },
 	  changed:function (id, change) {
 
 	  	console.log('Admin change',change )
@@ -30,12 +24,16 @@ t.events({
 			  	Helpers.loop()
 				Meteor.Router.to('/loop/'+Session.get('currentRoomId'));
 			}
-
-			
 		}
-				
-	  	
-	  	
+
+		if (change.roomStatus && change.roomStatus == 'stop'){
+
+			if (!Template.join.user().isAdmin)
+				Meteor.Router.to('/results/'+Session.get('currentRoomId'));
+
+		}
+
+
 	  }
 	});
 

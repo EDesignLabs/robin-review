@@ -24,9 +24,14 @@
     else
       window.location = "/join/"+id //not ideal but it will do
   },
+  '/results/:id': function(id) {
+    if (Session.get('currentRoomId'))
+      return 'results'
+    else
+      window.location = "/join/"+id //not ideal but it will do
+  },
   '/workbook/structure': function(){ 
     return 'workbookStructure'
   },
-
   '*': '404'
 });

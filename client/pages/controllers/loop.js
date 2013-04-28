@@ -7,8 +7,7 @@ t.helpers({
 		if (Session.get('loopActivityTemplate') && Template[Session.get('loopActivityTemplate')])
 			return Template[Session.get('loopActivityTemplate')]();
 		
-		return 'waitAction'
-
+	
 	}
 })
 
