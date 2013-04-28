@@ -12,7 +12,19 @@
   </ul>
 
   {{#if user.isAdmin }}
+
+    {{#constant}}
+      <select>
+        <option value="" style="display:none;"></option>
+        {{#each workbooks}}
+          <option value="{{workbookSlug}}">{{workbookSlug}}</option>
+        {{/each}}
+      </select>
+    {{/constant}}
+
     <button id ="start">Start</button>
+
+
   {{/if}}
   
   

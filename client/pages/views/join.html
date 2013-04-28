@@ -2,5 +2,8 @@
   <h1>Welcome to room {{roomId}}!</h1>
   <h2>Enter your name: </h2>
   <input type="text" id="username" ></input>
+  {{#unless isAlone}}
+  	<textarea rows="4" cols="50"></textarea>
+  {{/unless}}
   <button id = 'join'> Join </button>
 </template>

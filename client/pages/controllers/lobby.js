@@ -2,8 +2,8 @@
 var t = Template.lobby
 
 t.helpers({
-	user: function(){return Users.findOne({_id:Session.get('userId')})},
-	users: function(){return Users.find({roomId:Session.get('currentRoomId')})}
+	users: function(){return Users.find({roomId:Session.get('currentRoomId')})},
+	workbooks: function(){return Structures.find({}).distinct("workbookSlug")}
 })
 
 t.events({
@@ -11,16 +11,17 @@ t.events({
 		Users.remove({_id:this._id})
 	},
 	"click button#start":function(){
-		
+
 		Users.update(
 		   {_id:Session.get('userId')},
 		   {
-		     $set: { 'roomStatus': 'start' },
+		     $set: { 'roomStatus': 'start', 'workbookSlug': Session.get('currentWorkbookSlug')},
 		   }
 		)
 
+	},
+	"change select": function (event){
+		Session.set('currentWorkbookSlug', $(event.target).find('option:selected').val())
 	}
 })
-
-
 
