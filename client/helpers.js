@@ -1,10 +1,11 @@
 for (var n in Template){
   Template[n].user = function(){return Users.findOne({_id:Session.get('userId')})}
   Template[n].structure = function(){ return Structures.findOne({_id:Session.get('structureId')}) }
-  Template[n].activity = function(){ return Activities.findOne({_id:Session.get('activityId')}) }
+  Template[n].activity = function(){ return Helpers.currentActivity }
 }
 
 Helpers = {
+  currentActivity: {},
 	updateStructure:function(settings){
 		if (Session.get('structureId')){
 			Structures.update(
@@ -25,25 +26,58 @@ Helpers = {
 	},
   loop:function(){
 
-      if (isNaN(Session.get('onStructureIndex')))
-        Session.set('onStructureIndex', 0)
-      else
-        Session.set('onStructureIndex', Session.get('onStructureIndex') + 1)
+    console.log('////////////////STARTING LOOOP//////////////')
+
+    if (isNaN(Session.get('onStructureIndex')))
+      Session.set('onStructureIndex', 0)
+    else
+      Session.set('onStructureIndex', Session.get('onStructureIndex') + 1)
+
+    var structureCount = Structures.find({workbookSlug:Session.get('currentWorkbookSlug')}).count()
+    var users = Users.find({ roomId:Template.join.user().roomId, isAdmin: false, _id:{ $ne: Template.join.user()._id }})
+
+    if ( Session.get('onStructureIndex') <  structureCount && Template.join.user().completes < users.count()/2){
       
+
+      console.log('completes', Template.join.user().completes )
+      console.log('user counts', users.count() )
+      console.log('onStructureIndex', Session.get('onStructureIndex') )
+      console.log('structureCount', structureCount )
+
       var struct = Structures.find({workbookSlug:Session.get('currentWorkbookSlug')}).fetch()[Session.get('onStructureIndex')]
       Session.set('structureId', struct._id)
-      
-      console.log('curr user:' ,Template.loop.user())
-      console.log('curr structure:' ,Template.loop.structure())
-      console.log('curr activity:' ,Template.loop.activity())
-
       Session.set('loopActivityTemplate', Template.loop.structure().structureSlug + "Create")
+    }else if (Template.join.user().todos && Template.join.user().todos.length > 0) {
+
+      Helpers.currentActivity = Template.join.user().todos.slice(-1)[0]
+      Users.update( {_id:Session.get('userId')}, { $pop: { todos: 1 } } )
+        
+      console.log(Helpers.currentActivity)
+
+      Session.set('loopActivityTemplate', Helpers.currentActivity.structure.structureSlug + "Action")
+    }else{
+
+      Session.set('loopActivityTemplate', "waitingForData")
+      console.log('Nothing todo. Looping....')
+      Meteor.setTimeout(Helpers.loop, 4000)
+
+    }
+      
+
+
+
+    console.log('curr user:' ,Template.loop.user())
+    console.log('curr structure:' ,Template.loop.structure())
+    console.log('curr activity:' ,Template.loop.activity())
+
+    
 
   },
   createActivity:function(settings){
-    settings.structure = Template.loop.structure
+    settings.structure = Template.loop.structure()
+    settings.creatorId = Template.loop.user()._id
 
-    Meteor.call("addActivitySet", settings, Template.join.user().roomId)
+    Meteor.call("addActivitySet", settings, Template.join.user())
 
     
 

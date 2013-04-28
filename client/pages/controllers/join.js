@@ -49,6 +49,7 @@ t.events({
 		roomId: Session.get('currentRoomId'),
 		name: $('input#username').val(),
 		text: $('textarea').val(),
+		completes: 0,
 		'isAdmin': isAdmin
 	}))
 
