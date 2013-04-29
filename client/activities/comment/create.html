@@ -1,11 +1,23 @@
 <template name="commentCreate">
-	{{structure.highlight}}
-	<br>
-	<p id = "highlighter">
-		{{user.text}}
-	</p>
-	<div id = "highlighter-confirm"></div>
+	<div class="span6 selector">
+		<h2 class = "animated fadeInLeft  " >{{structure.highlight}}</h2>
+		<blockquote  id = "highlighter">
+			<p>{{user.text}}</p>
+		</blockquote>
+	</div>
 
-	<button id = "next">NEXT</button>
+	<div class="span6 selected">
+		<h5>Your selection will appear here</h5>
+ 
+		<blockquote>
+			<p  id = "highlighter-confirm"> </p>
+		</blockquote>
+	</div> 
 
+	<span class="clearfix"></span>		
+
+	<div class="btn-wrapper">
+		<button type="submit" class="disabled right btn btn-large btn-new">share &amp; continue</button>
+	</div>
 </template>
+

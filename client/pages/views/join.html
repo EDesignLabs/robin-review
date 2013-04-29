@@ -1,9 +1,22 @@
 <template name="join">
-  <h1>Welcome to room {{roomId}}!</h1>
-  <h2>Enter your name: </h2>
-  <input type="text" id="username" ></input>
-  {{#unless isAlone}}
-  	<textarea rows="4" cols="50"></textarea>
-  {{/unless}}
-  <button id = 'join'> Join </button>
+	<div class="span3">
+		{{#unless isAlone}}
+		<h2>Let's begin!</h2>
+		<p>We are going to work together. Paste a writing sample you would like to work on together. Don't worry no one will know it is your paper. </p>
+		 {{/unless}}
+	</div>
+	<div class="span9">
+
+				Enter your name: <input type="text" id="username" ></input>
+				{{#unless isAlone}}
+			    	<textarea class="span12" rows="20" placeholder="copy-paste or type text you would like to work on here..."></textarea>
+			    {{/unless}}
+			    <span class="row">
+			    	<button id = 'join' class="btn btn-large btn-new span3">
+			    		{{#if isAlone}} Create room {{/if}}
+			    		{{#unless isAlone}}Join others {{/unless}}<i class=" icon-arrow-right"></i></button>
+				</span>
+
+	</div>
 </template>
+

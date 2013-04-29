@@ -1,32 +1,39 @@
 <template name="lobby">
-  <h1>Welcome {{user.name}}!</h1>
+      <div class="span6 offset3">
+        <blockquote>
+          <span><span class = "lead">Welcome {{user.name}}!</span> We are just waiting for everyone to join. We will get started soon...</span>
+          <hr>
+          <p>People here right now</p>
+          <ul>
+            {{#each users}}
+                <li >  
+                  {{#if isAdmin }}<i class="  icon-group"></i>{{/if}}
+                  {{#unless isAdmin }}<i class=" icon-user"></i>{{/unless}}
+                  {{name}}
+                  {{#if user.isAdmin }}{{#unless isAdmin }}<button class ="boot">boot<i class=" icon-remove"></i></button>{{/unless}}{{/if}}
+                </li>
+               
+            {{/each}}
+          </ul>
 
-	<ul>
-	  {{#each users}}
-        <li >  
-          {{#if isAdmin }}<i class="icon-flag"></i>{{/if}}
-          {{name}}
-          {{#if user.isAdmin }}{{#unless isAdmin }}<button class ="boot">boot</button>{{/unless}}{{/if}}
-        </li>
-    {{/each}}
-  </ul>
+          <img  src = "/loader.gif">
+        </blockquote>
 
-  {{#if user.isAdmin }}
+        {{#if user.isAdmin }}
 
-    {{#constant}}
-      <select>
-        <option value="" style="display:none;"></option>
-        {{#each workbooks}}
-          <option value="{{workbookSlug}}">{{workbookSlug}}</option>
-        {{/each}}
-      </select>
-    {{/constant}}
+          {{#constant}}
+            <select>
+              <option value="" style="display:none;"></option>
+              {{#each workbooks}}
+                <option value="{{workbookSlug}}">{{workbookSlug}}</option>
+              {{/each}}
+            </select>
+          {{/constant}}
 
-    <button id ="start">Start</button>
+          <button id ="start">Start</button>
 
 
-  {{/if}}
-  
-  
-  
+        {{/if}}
+      </div>
 </template>
+

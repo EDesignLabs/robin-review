@@ -51,7 +51,7 @@ t.events({
 		'isAdmin': isAdmin
 	}))
 
-
+	Session.set('onStructureIndex',-1)
 
 	Meteor.Router.to('/lobby/'+Session.get('currentRoomId'));
   }

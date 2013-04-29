@@ -10,7 +10,7 @@ Handlebars.registerHelper('json', function(context) {
     return JSON.stringify(context);
 });
 
-
+   
  Handlebars.registerHelper('dynamicResultTemplate', function(name, context, options) {
 	name = name + "Result"
 	if (Template[name])

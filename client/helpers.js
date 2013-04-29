@@ -1,5 +1,5 @@
 for (var n in Template){
-  Template[n].user = function(){return Users.findOne({_id:Session.get('userId')})}
+  Template[n].user = function(){return User.get()}
   Template[n].structure = function(){ return Structures.findOne({_id:Session.get('structureId')}) }
   Template[n].activity = function(){ return Helpers.currentActivity }
 }
@@ -28,18 +28,15 @@ Helpers = {
 
     console.log('////////////////STARTING LOOOP//////////////')
 
-    if (isNaN(Session.get('onStructureIndex')))
-      Session.set('onStructureIndex', 0)
-    else
-      Session.set('onStructureIndex', Session.get('onStructureIndex') + 1)
+    Session.set('onStructureIndex', Session.get('onStructureIndex') + 1)
 
     var structureCount = Structures.find({workbookSlug:Session.get('currentWorkbookSlug')}).count()
-    var users = Users.find({ roomId:Template.join.user().roomId, isAdmin: false, _id:{ $ne: Template.join.user()._id }})
+    var users = Users.find({ roomId:User.get().roomId, isAdmin: false, _id:{ $ne: User.get()._id }})
 
-    if ( Session.get('onStructureIndex') <  structureCount && Template.join.user().completes < users.count()/2){
+    if ( Session.get('onStructureIndex') <  structureCount && User.get().completes < users.count()/2){
       
 
-      console.log('completes', Template.join.user().completes )
+      console.log('completes', User.get().completes )
       console.log('user counts', users.count() )
       console.log('onStructureIndex', Session.get('onStructureIndex') )
       console.log('structureCount', structureCount )
@@ -47,12 +44,12 @@ Helpers = {
       var struct = Structures.find({workbookSlug:Session.get('currentWorkbookSlug')}).fetch()[Session.get('onStructureIndex')]
       Session.set('structureId', struct._id)
       Session.set('loopActivityTemplate', Template.loop.structure().structureSlug + "Create")
-    }else if (Template.join.user().todos && Template.join.user().todos.length > 0) {
+    }else if (User.get().todos && User.get().todos.length > 0) {
 
-      Helpers.currentActivity = Template.join.user().todos.slice(-1)[0]
+      Helpers.currentActivity = User.get().todos.slice(-1)[0]
       Users.update( {_id:Session.get('userId')}, { $pop: { todos: 1 } } )
         
-      console.log(Helpers.currentActivity)
+      console.log("Current Activity:",Helpers.currentActivity)
 
       Session.set('loopActivityTemplate', Helpers.currentActivity.structure.structureSlug + "Action")
     }else{
@@ -77,7 +74,7 @@ Helpers = {
     settings.structure = Template.loop.structure()
     settings.creatorId = Template.loop.user()._id
 
-    Meteor.call("addActivitySet", settings, Template.join.user())
+    Meteor.call("addActivitySet", settings, User.get())
 
     Helpers.loop()
 
