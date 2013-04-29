@@ -19,7 +19,7 @@ Template.commentAction.events = {
 	"click button#complete": function (event){
 		console.log("Complete...")
 		Helpers.completeActivity({
-			comment: 'fly comment yo'
+			comment: $('textarea').val()
 		})
 	}
 };

@@ -1,6 +1,20 @@
 <template name="commentAction">
-	{{json activity}}
-	<button id = "complete">Next</button>
-	<h1>hello</h1>
-	{{activity.userHighlighted}}
+
+	<div class="span6 offset3">
+		<blockquote>
+			<p>{{activity.userHighlighted}}</p>
+		</blockquote>
+		<div class="rubric">
+			<h5 class="push-down">{{activity.structure.question}}</h5>
+			<div id="comment">
+				<textarea class="input-xxlarge" rows="10" placeholder="add your comment here..."></textarea>
+			</div>
+			<div class="btn-wrapper">
+				<button id = "complete" class="right btn btn-large btn-new">next</button>
+			</div>
+		</div>
+	</div>
+
+	
+	
 </template>

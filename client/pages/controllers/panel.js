@@ -1,7 +1,9 @@
 
 var t = Template.panel
 
-t.helpers({})
+t.helpers({
+	users: function(){return Users.find({roomId:Session.get('currentRoomId')})}
+})
 
 t.events({
 	"click button#stop": function(){

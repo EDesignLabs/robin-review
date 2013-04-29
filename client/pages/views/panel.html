@@ -1,8 +1,36 @@
 <template name="panel">
-  <h1>DAS Panel!</h1>
+  <h1>THe control Panel!</h1>
   <button id = 'stop'> STOP </button>
 
+
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>name</th>
+      <th>Others to do</th>
+      <th>My todo completed</th>
+      <th>activities of mine left</th>
+    </tr>
+  </thead>
+  <tbody>
+
+
+
+  	{{#each users}}
+    <tr>
+      <td>{{this.name}}</td>
+      <td>{{json this.todos}}</td>
+      <td>{{json this.todosComplete}}</td>
+      <td>{{this.completes}}</td>
+    </tr>
+	{{/each}}
+
+  </tbody>
+</table>
+
+
   
-  
+ 
   
 </template>
