@@ -35,7 +35,7 @@ Helpers = {
 
     if ( Session.get('onStructureIndex') <  structureCount && User.get().completes < users.count()/2){
       
-
+      
       console.log('completes', User.get().completes )
       console.log('user counts', users.count() )
       console.log('onStructureIndex', Session.get('onStructureIndex') )
@@ -60,6 +60,8 @@ Helpers = {
 
     }
       
+
+
 
 
 
@@ -89,6 +91,7 @@ Helpers = {
       { $push: { todosComplete: Helpers.currentActivity }}
     )
 
+    Session.set('loopActivityTemplate', "")
     Helpers.loop()
 
   }
