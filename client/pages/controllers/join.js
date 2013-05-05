@@ -1,58 +1,49 @@
 var t = Template.join
 
 t.helpers({
-  roomId: function() { return Session.get('currentRoomId'); },
-  isAlone: function() {	return Users.find({roomId: Session.get('currentRoomId')}).count() == 0}
+	roomId: function() { return Global.roomSlug; },
+	isInRoomFirst: function() { 
+		return (Rooms.find({ slug: Global.roomSlug, active: true }).count() == 0)
+	}
 })
 
-t.events({
+t.events({ 
   'click button#join' : function () {
 
-	var query = Users.find({roomId:Session.get('currentRoomId'), isAdmin:true});
-	var handle = query.observeChanges({
-	  changed:function (id, change) {
+  	if (Rooms.find({
+  			slug: Global.roomSlug, 
+  			active: true 
+  		}).count() == 0)
+  	{
+		Global.roomId = Rooms.insert({
+			slug: Global.roomSlug,
+			admin: {id: Global.userId, name: $('input#username').val()},
+			active: true,
+			workbook:'oneHasNotBeenSet',
+			users: []
+		})
 
-	  	console.log('Admin change',change )
+		Global.isAdmin = true
+  	}else{
 
-		if (change.roomStatus && change.roomStatus == 'start'){
+  		Global.roomId = Rooms.findOne({ slug: Global.roomSlug, active: true })._id;
 
-			Session.set('currentWorkbookSlug', change.workbookSlug)
-
-			if (Users.findOne({_id: Session.get('userId') }).isAdmin)
-				Meteor.Router.to('/panel/'+Session.get('currentRoomId'));
-			else{
-			  	Helpers.loop()
-				Meteor.Router.to('/loop/'+Session.get('currentRoomId'));
-			}
+  		var user = {
+  			id: Global.userId,
+			name: $('input#username').val(),
+			text: $('textarea').val()
 		}
 
-		if (change.roomStatus && change.roomStatus == 'stop'){
+  		Rooms.update(
+  			{ _id: Global.roomId },
+  			{ $push: { users: user } }
+  		)
+		
 
-			if (!Template.join.user().isAdmin)
-				Meteor.Router.to('/results/'+Session.get('currentRoomId'));
+  	}
 
-		}
-
-
-	  }
-	});
+  	Meteor.Router.to('/loop/'+Global.roomSlug);
 
 
-  	var isAdmin = false;
-
-  	if (Users.find({roomId: Session.get('currentRoomId')}).count() == 0)
-  		isAdmin = true;
-
-	Session.set('userId', Users.insert({
-		roomId: Session.get('currentRoomId'),
-		name: $('input#username').val(),
-		text: $('textarea').val(),
-		completes: 0,
-		'isAdmin': isAdmin
-	}))
-
-	Session.set('onStructureIndex',-1)
-
-	Meteor.Router.to('/lobby/'+Session.get('currentRoomId'));
   }
 });

@@ -3,6 +3,15 @@
   <button id = 'stop'> STOP </button>
 
 
+{{#constant}}
+  <select class = "workbook">
+    <option value="" style="display:none;"></option>
+    {{#each workbooks}}
+      <option value="{{workbookSlug}}">{{workbookSlug}}</option>
+    {{/each}}
+  </select>
+{{/constant}}
+
 
 <table class="table table-bordered">
   <thead>
@@ -19,7 +28,7 @@
 
   	{{#each users}}
     <tr>
-      <td>{{this.name}}</td>
+      <td>{{this.name}} <button class = "boot">boot</button></td>
       <td>{{json this.todos}}</td>
       <td>{{json this.todosComplete}}</td>
       <td>{{this.completes}}</td>

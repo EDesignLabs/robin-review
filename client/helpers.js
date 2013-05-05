@@ -1,7 +1,19 @@
 for (var n in Template){
-  Template[n].user = function(){return User.get()}
-  Template[n].structure = function(){ return Structures.findOne({_id:Session.get('structureId')}) }
-  Template[n].activity = function(){ return Helpers.currentActivity }
+  Template[n].user = function(){
+    var users = Rooms.findOne({_id:Global.roomId}).users
+    
+    if (users)
+      for (var i = 0; i < users.length; i++) {
+        if (users[i].id == Global.userId)
+          return users[i]
+      };
+
+    console.log('warning no user found.')
+    return undefined
+
+  }
+  Template[n].structure = function(){ return Template.loop.currStructure }
+  //Template[n].activity = function(){ return Helpers.currentActivity }
 }
 
 Helpers = {
@@ -26,8 +38,11 @@ Helpers = {
 	},
   loop:function(){
 
-    console.log('////////////////STARTING LOOOP//////////////')
+    //console.log('////////////////STARTING LOOOP//////////////')
+    //var activities = 
 
+
+/*
     Session.set('onStructureIndex', Session.get('onStructureIndex') + 1)
 
     var structureCount = Structures.find({workbookSlug:Session.get('currentWorkbookSlug')}).count()
@@ -62,7 +77,7 @@ Helpers = {
       
 
 
-
+*/
 
 
     console.log('curr user:' ,Template.loop.user())

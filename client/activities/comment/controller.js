@@ -9,7 +9,7 @@ Template.commentStructure.events = {
 
 Template.commentCreate.events = {
 	"click button": function (event){
-		Helpers.createActivity({
+		Template.loop.create({
 			userHighlighted: $('#highlighter-confirm').text()
 		})
 	}
