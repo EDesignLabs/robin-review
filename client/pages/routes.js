@@ -10,7 +10,6 @@
     if (Global.roomSlug && Global.isAdmin){
         return 'panel'
     }else if (Global.roomSlug){
-      Template.loop.start()
       return 'loop'        
     }else{
       window.location = "/join/"+slug //not ideal but it will do

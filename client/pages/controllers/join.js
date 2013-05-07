@@ -20,6 +20,7 @@ t.events({
 			admin: {id: Global.userId, name: $('input#username').val()},
 			active: true,
 			workbook:'oneHasNotBeenSet',
+      newFlag: 'oneHasNotBeenSet',
 			users: []
 		})
 
@@ -43,7 +44,7 @@ t.events({
   	}
 
   	Meteor.Router.to('/loop/'+Global.roomSlug);
-
+    if (!Global.isAdmin) Template.loop.start()
 
   }
 });

@@ -2,6 +2,8 @@ var t = Template.loop
 
 console.log('reset///')
 t.seenStructures = []
+t.seenActivities = []
+t.seenNewFlag = [];
 
 t.helpers({
 	loopActivityTemplate: function(){
@@ -15,24 +17,65 @@ t.helpers({
 
 
 t.start = function(){
-    console.log('////////////////STARTING LOOOP//////////////')
+    console.log('////////////////STARTING LOOOP//////////////!')
     Session.set('loopActivityTemplate', "")
 
-    var workbookSlug = Rooms.findOne({_id:Global.roomId}).workbook
-    var structures = Structures.find({'workbookSlug':workbookSlug, _id:{$nin:t.seenStructures} }).fetch();
-    t.currStructure = structures[Math.floor(Math.random()*structures.length)];
-  
-    //Activities.find({roomId:Global.roomId, userId:{$ne:Global.userId}}).fetch()
-    //Meteor.setTimeout(t.start, 4000)
 
-	if ( t.currStructure ){
-		console.log('Current Structure:', t.currStructure)
+    
+
+	//
+
+    //
+    //
+
+    if(!(Rooms.findOne({_id:Global.roomId}).active)){
+    	Meteor.Router.to('/results/'+Global.roomSlug);
+    }else if ( Rooms.findOne({_id:Global.roomId}).newFlag != t.seenNewFlag){
+		t.seenNewFlag = Rooms.findOne({_id:Global.roomId}).newFlag; 
+		t.initCreate()
+	}else{
+
+		console.log('Searching for new activities')
+		var activities = Activities.find({roomId:Global.roomId,  _id:{$nin:t.seenActivities}, userId:{$ne:Global.userId}}).fetch();
+		console.log('activities', activities)
+
+		if (activities.length > 0){
+
+		}else{
+			//call others to create activities...
+			// then
+			t.initCreate()
+		}
+
 		
-		Session.set('loopActivityTemplate', t.currStructure.structureSlug + "Create")
-		t.seenStructures.push(t.currStructure._id)
+	
+
 	}
 
+	
 
+
+}
+
+t.initCreate = function(){
+	console.log('....initiating structure creation.....')
+
+	var workbookSlug = Rooms.findOne({_id:Global.roomId}).workbook
+    var structures = Structures.find({'workbookSlug':workbookSlug, _id:{$nin:t.seenStructures} }).fetch();
+    t.currStructure = structures[Math.floor(Math.random()*structures.length)];
+    
+    console.log('workbookSlug', workbookSlug)
+    console.log('structures', structures)
+    console.log(' t.currStructure',  t.currStructure)
+
+    if (t.currStructure){
+    	Session.set('loopActivityTemplate', t.currStructure.structureSlug + "Create")
+		t.seenStructures.push(t.currStructure._id)
+	}else{
+		console.log(' -- no structure found looping -- ')
+		Session.set('loopActivityTemplate', "waitingForData")
+		Meteor.setTimeout(t.start, 2000)
+	}
 }
 
 
@@ -46,4 +89,9 @@ t.create = function(settings){
 
 	Activities.insert( activity )
 	t.start()
+}
+
+t.complete = function (){
+
+
 }
