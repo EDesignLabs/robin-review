@@ -20,17 +20,10 @@ t.start = function(){
     console.log('////////////////STARTING LOOOP//////////////!')
     Session.set('loopActivityTemplate', "")
 
-
-    
-
-	//
-
-    //
-    //
-
     if(!(Rooms.findOne({_id:Global.roomId}).active)){
     	Meteor.Router.to('/results/'+Global.roomSlug);
     }else if ( Rooms.findOne({_id:Global.roomId}).newFlag != t.seenNewFlag){
+    	console.log('new flag!')
 		t.seenNewFlag = Rooms.findOne({_id:Global.roomId}).newFlag; 
 		t.initCreate()
 	}else{
@@ -40,10 +33,14 @@ t.start = function(){
 		console.log('activities', activities)
 
 		if (activities.length > 0){
-
+			t.currActivity = activities[Math.floor(Math.random()*activities.length)];
+			t.seenStructures.push(t.currActivity._id)
+			Session.set('loopActivityTemplate', t.currActivity.structure.structureSlug + "Action")
+			console.log(' t.currActivity',  t.currActivity)
 		}else{
 			//call others to create activities...
-			// then
+			t.seenNewFlag = Helpers.uniqueId();
+			Rooms.update({_id:Global.roomId}, {$set: { 'newFlag': t.seenNewFlag }})
 			t.initCreate()
 		}
 
@@ -62,15 +59,15 @@ t.initCreate = function(){
 
 	var workbookSlug = Rooms.findOne({_id:Global.roomId}).workbook
     var structures = Structures.find({'workbookSlug':workbookSlug, _id:{$nin:t.seenStructures} }).fetch();
-    t.currStructure = structures[Math.floor(Math.random()*structures.length)];
-    
+       
     console.log('workbookSlug', workbookSlug)
     console.log('structures', structures)
-    console.log(' t.currStructure',  t.currStructure)
 
-    if (t.currStructure){
-    	Session.set('loopActivityTemplate', t.currStructure.structureSlug + "Create")
+    if (structures.length > 0){
+    	t.currStructure = structures[Math.floor(Math.random()*structures.length)];
 		t.seenStructures.push(t.currStructure._id)
+		Session.set('loopActivityTemplate', t.currStructure.structureSlug + "Create")
+		console.log(' t.currStructure',  t.currStructure)
 	}else{
 		console.log(' -- no structure found looping -- ')
 		Session.set('loopActivityTemplate', "waitingForData")

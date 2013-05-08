@@ -15,6 +15,7 @@ t.events({
 	}, 
 	"change select.workbook": function (event){
 		Rooms.update({_id:Global.roomId}, {$set:{workbook:$(event.target).find('option:selected').val()}})
+		Rooms.update({_id:Global.roomId}, {$set: { 'newFlag': Helpers.uniqueId() }})
 	}
 })
 
