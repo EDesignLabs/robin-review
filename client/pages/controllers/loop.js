@@ -20,16 +20,21 @@ t.start = function(){
     console.log('////////////////STARTING LOOOP//////////////!')
     Session.set('loopActivityTemplate', "")
 
-    if(!(Rooms.findOne({_id:Global.roomId}).active)){
+    if(!(Rooms.findOne({_id:Global.roomId}, {reactive: false}).active)){
     	Meteor.Router.to('/results/'+Global.roomSlug);
-    }else if ( Rooms.findOne({_id:Global.roomId}).newFlag != t.seenNewFlag){
+    }else if ( Rooms.findOne({_id:Global.roomId}, {reactive: false}).newFlag != t.seenNewFlag){
     	console.log('new flag!')
-		t.seenNewFlag = Rooms.findOne({_id:Global.roomId}).newFlag; 
+		t.seenNewFlag = Rooms.findOne({_id:Global.roomId}, {reactive: false}).newFlag; 
 		t.initCreate()
 	}else{
 
 		console.log('Searching for new activities')
-		var activities = Activities.find({roomId:Global.roomId,  _id:{$nin:t.seenActivities}, userId:{$ne:Global.userId}}).fetch();
+		var activities = Activities.find({
+				roomId:Global.roomId,  
+				_id:{$nin:t.seenActivities}, 
+				userId:{$ne:Global.userId}
+			}, {reactive: false}).fetch();
+
 		console.log('activities', activities)
 
 		if (activities.length > 0){
@@ -57,8 +62,8 @@ t.start = function(){
 t.initCreate = function(){
 	console.log('....initiating structure creation.....')
 
-	var workbookSlug = Rooms.findOne({_id:Global.roomId}).workbook
-    var structures = Structures.find({'workbookSlug':workbookSlug, _id:{$nin:t.seenStructures} }).fetch();
+	var workbookSlug = Rooms.findOne({_id:Global.roomId},{reactive: false} ).workbook
+    var structures = Structures.find({'workbookSlug':workbookSlug, _id:{$nin:t.seenStructures} },{reactive: false}).fetch();
        
     console.log('workbookSlug', workbookSlug)
     console.log('structures', structures)

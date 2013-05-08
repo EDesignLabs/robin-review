@@ -1,6 +1,6 @@
 for (var n in Template){
   Template[n].user = function(){
-    var users = Rooms.findOne({_id:Global.roomId}).users
+    var users = Rooms.findOne({_id:Global.roomId}, {reactive:false} ).users
     
     if (users)
       for (var i = 0; i < users.length; i++) {
