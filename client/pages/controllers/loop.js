@@ -93,7 +93,14 @@ t.create = function(settings){
 	t.start()
 }
 
-t.complete = function (){
+t.complete = function (result){
 
+    result.completorId = Global.userId
+    console.log("adding result: ", result)
+    
+    Activities.update({_id:t.currActivity._id}, { $push: { results: result } })
+
+    Session.set('loopActivityTemplate', "")
+    t.start()
 
 }

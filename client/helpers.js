@@ -13,7 +13,7 @@ for (var n in Template){
 
   }
   Template[n].structure = function(){ return Template.loop.currStructure }
-  //Template[n].activity = function(){ return Helpers.currentActivity }
+  Template[n].activity = function(){ return Template.loop.currActivity.settings }
 }
 
 Helpers = {
@@ -36,86 +36,7 @@ Helpers = {
 		Session.set('structureId', undefined)
 
 		Meteor.Router.to('/workbook');
-	},
-  loop:function(){
-
-    //console.log('////////////////STARTING LOOOP//////////////')
-    //var activities = 
-
-
-/*
-    Session.set('onStructureIndex', Session.get('onStructureIndex') + 1)
-
-    var structureCount = Structures.find({workbookSlug:Session.get('currentWorkbookSlug')}).count()
-    var users = Users.find({ roomId:User.get().roomId, isAdmin: false, _id:{ $ne: User.get()._id }})
-
-    if ( Session.get('onStructureIndex') <  structureCount && User.get().completes < users.count()/2){
-      
-
-      console.log('completes', User.get().completes )
-      console.log('user counts', users.count() )
-      console.log('onStructureIndex', Session.get('onStructureIndex') )
-      console.log('structureCount', structureCount )
-
-      var struct = Structures.find({workbookSlug:Session.get('currentWorkbookSlug')}).fetch()[Session.get('onStructureIndex')]
-      Session.set('structureId', struct._id)
-      Session.set('loopActivityTemplate', Template.loop.structure().structureSlug + "Create")
-    }else if (User.get().todos && User.get().todos.length > 0) {
-
-      Helpers.currentActivity = User.get().todos.slice(-1)[0]
-      Users.update( {_id:Session.get('userId')}, { $pop: { todos: 1 } } )
-        
-      console.log("Current Activity:",Helpers.currentActivity)
-
-      Session.set('loopActivityTemplate', Helpers.currentActivity.structure.structureSlug + "Action")
-    }else{
-
-      Session.set('loopActivityTemplate', "waitingForData")
-      console.log('Nothing todo. Looping....')
-      Meteor.setTimeout(Helpers.loop, 4000)
-
-    }
-      
-
-
-*/
-
-
-    console.log('curr user:' ,Template.loop.user())
-    console.log('curr structure:' ,Template.loop.structure())
-    console.log('curr activity:' ,Template.loop.activity())
-
-    
-
-  },
-  createActivity:function(settings){
-    settings.structure = Template.loop.structure()
-    settings.creatorId = Template.loop.user()._id
-
-    Meteor.call("addActivitySet", settings, User.get())
-
-    Helpers.loop()
-
-  },
-  completeActivity:function(result){
-
-    result.completorId = Template.loop.user()._id
-    _.extend(Helpers.currentActivity, {result : result});
-    
-    Users.update(
-      { _id:Helpers.currentActivity.creatorId},
-      { $push: { todosComplete: Helpers.currentActivity }}
-    )
-
-      Users.update( 
-        { _id: Helpers.currentActivity.creatorId },
-        { $inc: { completes: -1 } } 
-      );
-
-    Session.set('loopActivityTemplate', "")
-    Helpers.loop()
-
-  }
+	}
 }
 
 //http://stackoverflow.com/questions/14514733/does-meteor-have-a-distinct-query-for-collections

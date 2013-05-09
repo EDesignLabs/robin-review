@@ -3,8 +3,7 @@ var t = Template.results
 
 t.helpers({
 	results: function(){ 
-		return User.get().todosComplete
-
+		return Activities.find({userId:Global.userId}).fetch();
 	},
 })
 

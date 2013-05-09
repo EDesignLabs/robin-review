@@ -17,8 +17,7 @@ Template.commentCreate.events = {
 
 Template.commentAction.events = {
 	"click button#complete": function (event){
-		console.log("Complete...")
-		Helpers.completeActivity({
+		Template.loop.complete({
 			comment: $('textarea').val()
 		})
 	}
