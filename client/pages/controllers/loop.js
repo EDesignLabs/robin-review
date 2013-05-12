@@ -39,7 +39,7 @@ t.start = function(){
 
 		if (activities.length > 0){
 			t.currActivity = activities[Math.floor(Math.random()*activities.length)];
-			t.seenStructures.push(t.currActivity._id)
+			t.seenActivities.push(t.currActivity._id)
 			Session.set('loopActivityTemplate', t.currActivity.structure.structureSlug + "Action")
 			console.log(' t.currActivity',  t.currActivity)
 		}else{
@@ -96,6 +96,8 @@ t.create = function(settings){
 t.complete = function (result){
 
     result.completorId = Global.userId
+    result.completorName = Global.userName
+    
     console.log("adding result: ", result)
     
     Activities.update({_id:t.currActivity._id}, { $push: { results: result } })

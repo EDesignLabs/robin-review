@@ -15,25 +15,27 @@ t.events({
   			active: true 
   		}).count() == 0)
   	{
-		Global.roomId = Rooms.insert({
-			slug: Global.roomSlug,
-			admin: {id: Global.userId, name: $('input#username').val()},
-			active: true,
-			workbook:'oneHasNotBeenSet',
-      newFlag: 'oneHasNotBeenSet',
-			users: []
-		})
+  		Global.roomId = Rooms.insert({
+  			slug: Global.roomSlug,
+  			admin: {id: Global.userId, name: $('input#username').val()},
+  			active: true,
+  			workbook:'oneHasNotBeenSet',
+        newFlag: 'oneHasNotBeenSet',
+  			users: []
+  		})
 
-		Global.isAdmin = true
+  		Global.isAdmin = true
   	}else{
 
   		Global.roomId = Rooms.findOne({ slug: Global.roomSlug, active: true })._id;
 
   		var user = {
-  			id: Global.userId,
-			name: $('input#username').val(),
-			text: $('textarea').val()
-		}
+  		  id: Global.userId,
+			 name: $('input#username').val(),
+			 text: $('textarea').val()
+		  }
+
+      Global.userName = $('input#username').val()
 
   		Rooms.update(
   			{ _id: Global.roomId },

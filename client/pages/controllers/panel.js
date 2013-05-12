@@ -8,7 +8,7 @@ t.helpers({
 
 t.events({
 	"click button#stop": function(){
-		
+		Rooms.update({_id:Global.roomId}, {$set: { 'active': false }})
 	}, 
 	"click button.boot": function(){
 		Rooms.update({_id:Global.roomId}, {$pull: {'users': {_id:this._id}}})

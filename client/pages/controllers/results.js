@@ -3,7 +3,21 @@ var t = Template.results
 
 t.helpers({
 	results: function(){ 
-		return Activities.find({userId:Global.userId}).fetch();
+		var results = [];
+		var act =  Activities.find({userId:Global.userId}).fetch()
+		for (var i = 0; i < act.length; i++) {
+			if (act[i].results)
+				for (var j = 0; j < act[i].results.length; j++) {
+					act[i].results[j].activity = act[i];
+					var result = {}
+					_.extend(result, act[i])
+					result['result'] = act[i].results[j]
+					results.push(result)
+				}
+		};
+
+		console.log(results);
+		return results;
 	},
 })
 

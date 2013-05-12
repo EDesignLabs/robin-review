@@ -1,10 +1,12 @@
 <template name="results">
 
 <h1>RESULTS</h1>
+
 {{#each results}}
-    {{dynamicResultTemplate this.structure.structureSlug this}}
-    <hr>
+	{{{dynamicResultTemplate this}}}
+	<hr>
 {{/each}}
+
 
   
 </template>
