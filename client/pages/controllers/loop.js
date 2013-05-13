@@ -82,6 +82,7 @@ t.initCreate = function(){
 
 
 t.create = function(settings){
+	settings.context = Global.userText
 	var activity = {
 		'settings': settings, 
 		'structure': t.currStructure,
@@ -97,7 +98,7 @@ t.complete = function (result){
 
     result.completorId = Global.userId
     result.completorName = Global.userName
-    
+
     console.log("adding result: ", result)
     
     Activities.update({_id:t.currActivity._id}, { $push: { results: result } })

@@ -36,6 +36,7 @@ t.events({
 		  }
 
       Global.userName = $('input#username').val()
+      Global.userText = $('textarea').val()
 
   		Rooms.update(
   			{ _id: Global.roomId },
