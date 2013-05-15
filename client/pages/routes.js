@@ -19,8 +19,9 @@
   '/results/:slug': function(slug) {
     if (Global.roomSlug)
       return 'results'
-    else
+    else{
       window.location = "/join/"+slug //not ideal but it will do
+    }
   },
   '/workbook/structure': function(){ 
     return 'workbookStructure'

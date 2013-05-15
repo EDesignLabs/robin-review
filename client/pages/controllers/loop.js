@@ -3,7 +3,7 @@ var t = Template.loop
 console.log('reset///')
 t.seenStructures = []
 t.seenActivities = []
-t.seenNewFlag = [];
+t.seenNewFlag = '';
 
 t.helpers({
 	loopActivityTemplate: function(){
@@ -22,12 +22,13 @@ t.start = function(){
 
     if(!(Rooms.findOne({_id:Global.roomId}, {reactive: false}).active)){
     	Meteor.Router.to('/results/'+Global.roomSlug);
-    }else if ( Rooms.findOne({_id:Global.roomId}, {reactive: false}).newFlag != t.seenNewFlag){
+    }
+    else if ( Rooms.findOne({_id:Global.roomId}, {reactive: false}).newFlag != t.seenNewFlag){
     	console.log('new flag!')
 		t.seenNewFlag = Rooms.findOne({_id:Global.roomId}, {reactive: false}).newFlag; 
 		t.initCreate()
-	}else{
-
+	}
+	else{
 		console.log('Searching for new activities')
 		var activities = Activities.find({
 				roomId:Global.roomId,  
@@ -44,6 +45,7 @@ t.start = function(){
 			console.log(' t.currActivity',  t.currActivity)
 		}else{
 			//call others to create activities...
+			Session.set('loopActivityTemplate', "waitingForData")
 			t.seenNewFlag = Helpers.uniqueId();
 			Rooms.update({_id:Global.roomId}, {$set: { 'newFlag': t.seenNewFlag }})
 			t.initCreate()

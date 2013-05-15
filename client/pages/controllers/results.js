@@ -18,7 +18,7 @@ t.helpers({
 
 		console.log(results);
 		return results;
-	},
+	}
 })
 
 t.events({
