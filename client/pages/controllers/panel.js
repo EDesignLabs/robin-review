@@ -3,7 +3,8 @@ var t = Template.panel
 
 t.helpers({
 	users: function(){return Rooms.findOne({_id:Global.roomId}).users},
-	workbooks: function(){return Structures.find({}).distinct("workbookSlug")}
+	workbooks: function(){return Structures.find({}).distinct("workbookSlug")},
+	activities:function(){return Activities.find({roomId:Global.roomId}).fetch();}
 })
 
 t.events({

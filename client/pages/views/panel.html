@@ -2,44 +2,39 @@
   <h1>THe control Panel!</h1>
   <button id = 'stop'> STOP </button>
 
+  <hr>
+  {{#constant}}
+    <select class = "workbook">
+      <option value="" style="display:none;"></option>
+      {{#each workbooks}}
+        <option value="{{workbookSlug}}">{{workbookSlug}}</option>
+      {{/each}}
+    </select>
+  {{/constant}}
+  <hr>
 
-{{#constant}}
-  <select class = "workbook">
-    <option value="" style="display:none;"></option>
-    {{#each workbooks}}
-      <option value="{{workbookSlug}}">{{workbookSlug}}</option>
-    {{/each}}
-  </select>
-{{/constant}}
-
-
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th>name</th>
-      <th>Others to do</th>
-      <th>My todo completed</th>
-      <th>activities of mine left</th>
-    </tr>
-  </thead>
-  <tbody>
-
-
-
-  	{{#each users}}
-    <tr>
-      <td>{{this.name}} <button class = "boot">boot</button></td>
-      <td>{{json this.todos}}</td>
-      <td>{{json this.todosComplete}}</td>
-      <td>{{this.completes}}</td>
-    </tr>
-	{{/each}}
-
-  </tbody>
-</table>
-
+  <div class="row-fluid">
+    <div class="span6 selector">
+      <h1>Users</h1>
+      <ul>
+        {{#each users}}
+            <li>{{this.name}} <button class = "boot">boot</button></li>
+        {{/each}}
+      </ul>
+    </div>
+    <div class="span6 selected">
+        <h1> Activity List</h1>
+        <ul>
+          {{#each activities}}
+              {{json this}}
+          {{/each}}
+        </ul>
+    </div>
+  </div>
 
   
  
   
 </template>
+
+
