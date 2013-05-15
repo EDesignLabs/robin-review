@@ -60,7 +60,7 @@ LocalCollection.Cursor.prototype.distinct = function (key) {
 $(function () {
 
   $('body').on('mouseup', '#highlighter', function (e) {
-      console.log('testssss')
+
 
       var html = "";
       if (typeof window.getSelection != "undefined") {
