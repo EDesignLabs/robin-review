@@ -1,0 +1,46 @@
+<template name="rubericResult">
+	<p>In response to: {{this.structure.question}}</p>
+	 said that they thought this was your {{this.structure.noun}}:
+	<h4>{{this.result.choice}}</h4>
+
+	{{json collate}}
+
+		<h2 class="pagination-centered">Feedback</h2>
+			<section class="rubrics span10 offset1">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th><i class="icon star-filled"></i><i class="icon star-filled"></i><i class="icon star-filled"></i></th>
+							<th><i class="icon star-filled"></i><i class="icon star-filled"></i><i class="icon star-unfilled"></i></th>
+							<th><i class="icon star-filled"></i><i class="icon star-unfilled"></i><i class="icon star-unfilled"></i></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<p><b>{{collate.threestarchoice}} people said : </b>&quot;{{this.structure.header}} {{this.structure.threestarchoice}}&quot;</p>
+							</td>
+							<td>
+								<p><b>{{collate.twostarchoice}} people said : </b>&quot;{{this.structure.header}} {{this.structure.twostarchoice}}&quot;</p>
+
+							</td>
+							<td>
+								<p><b>{{collate.onestarchoice}}  people said : </b>{{this.structure.onestarchoice}}&quot;</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p><b>3 people said : </b>&quot;Introduction’s opening is strong, interesting, &amp; grabs the reader’s attention&quot;</p>
+							</td>
+							<td>
+								<p><b>15 people said : </b>&quot;Introduction’s opening is somewhat interesting&quot;</p>
+							</td>
+							<td>
+								<p><b>6 people said : </b>&quot;Introduction’s opening is uninteresting or vague&quot;</p>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+			</section>
+</template>
