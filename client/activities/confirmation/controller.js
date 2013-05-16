@@ -11,7 +11,8 @@ Template.confirmationStructure.events = {
 Template.confirmationCreate.events = {
 	"click button": function (event){
 		Template.loop.create({
-			userHighlighted: $('#highlighter-confirm').text()
+			userHighlighted: $('#highlighter-confirm').text(),
+			userContext: Global.userText
 		})
 	}
 };
