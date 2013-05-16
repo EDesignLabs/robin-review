@@ -149,11 +149,13 @@ textarea{
 .highlit
 {
 	background-color: #f6ff00;
+	display: inline;
 }
-	.highlit blockquote p
-	{
-		color: #1b1b1b;
-	}
+
+.greater-context{
+	cursor: pointer;
+}
+
 
 .selected blockquote p
 {

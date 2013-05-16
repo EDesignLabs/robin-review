@@ -80,6 +80,11 @@ $(function () {
 
       $("#highlighter-confirm").text(html)
     });
+
+  $('body').on('mouseup', '.greater-context', function (e) {
+    console.log(this)
+      $(this).html($(this).data('context').replace($(this).text(), '<p class = "highlit">'+$(this).text()+'</p> '));
+    });
 });
 
 
