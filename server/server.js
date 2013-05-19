@@ -1,25 +1,21 @@
 Meteor.startup(function () {
-// code to run on server at startup
 	Meteor.methods({
+	  sendEmail: function (to, from, subject, text) {
+	    check([to, from, subject, text], [String]);
 
-/*
-        addActivitySet: function (settings, user, users) {
-            Users.update(
-		      { roomId:user.roomId, isAdmin: false, _id:{ $ne: user._id }},
-		      { $push: { todos: settings } },
-		      { multi: true }
-		    )
+	    // Let other method calls from the same client start running,
+	    // without waiting for the email sending to complete.
+	    this.unblock();
 
-            var count =  Users.find({ roomId:user.roomId, isAdmin: false, _id:{ $ne: user._id }}).count()
-
-			Users.update( 
-				{ _id: user._id },
-				{ $inc: { completes: count } } 
-			);
-        }
-
-*/
-
-    });
+	    Email.send({
+	      to: to,
+	      from: from,
+	      subject: subject,
+	      text: text
+	    });
+	  }
+	});
 
 });
+
+

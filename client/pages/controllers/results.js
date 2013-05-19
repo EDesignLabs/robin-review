@@ -21,7 +21,18 @@ t.helpers({
 	}
 })
 
-t.events({
 
+t.events({
+	"click button": function(){
+		console.log('bobsss')
+		Meteor.call(
+			'sendEmail',
+            $('input').val(),
+            'rr@rr.com',
+            'Hello from Robin Reveiw!',
+            $('#email').html()
+        );
+	}, 
 })
+
 

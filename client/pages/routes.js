@@ -16,12 +16,10 @@
     }
       
   },
-  '/results/:slug': function(slug) {
-    if (Global.roomSlug)
+  '/results/:id': function(id) {
+      Global.userId = id
+      console.log(Global.userId)
       return 'results'
-    else{
-      window.location = "/join/"+slug //not ideal but it will do
-    }
   },
   '/workbook/structure': function(){ 
     return 'workbookStructure'

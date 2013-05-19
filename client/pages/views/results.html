@@ -2,10 +2,16 @@
 
 <h1>RESULTS</h1>
 
-{{#each results}}
-	{{{dynamicResultTemplate this}}}
-	<hr>
-{{/each}}
+Send the results to : <input type="text" placeholder = "name@email.com" ><button class = "send-email">Send</button>
+
+<hr>
+
+<div id ="email">
+	{{#each results}}
+		{{{dynamicResultTemplate this}}}
+		<hr>
+	{{/each}}
+</div>
 
 
   

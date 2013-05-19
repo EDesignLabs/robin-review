@@ -19,11 +19,22 @@ Template.rubericCreate.events = {
 };
 
 Template.rubericAction.events = {
-	"click button": function (event){
+	"click button.btn-radio": function (event){
+		console.log($(event.toElement));
+		$('.btn-radio').removeClass('active')
+		$(event.toElement).addClass('btn-radio active')
 
+	},
+	"click button.next": function (event){
 		Template.loop.complete({
-			choice: $(event.toElement).attr('id')
+			choice: $('.btn-radio.active').attr('id'),
+			comment: $('textarea').val();
 		})
+	},
+	"click button.show-comment": function (event){
+		$('.commentbox').slideDown();
+		$('button.show-comment').slideUp();
+		console.log('test')
 	}
 };
 
@@ -52,8 +63,6 @@ Template.rubericResult.helpers({
 					
 				}
 		};
-
-		console.log(flat, "flat")
 		return flat;
 	}
 });

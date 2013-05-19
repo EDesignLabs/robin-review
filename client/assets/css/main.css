@@ -169,6 +169,8 @@ blockquote
 	background-color: #f3f3f2;
 	border: 1px solid #d6d6d6;
 	position: relative;
+	max-height: 250px;
+	overflow: auto;
 }
 	.loading
 	{
@@ -189,6 +191,7 @@ blockquote
 
 	blockquote p
 	{
+		display: inline;
 		margin-bottom: 20px;
 	}
 	.ranking blockquote

@@ -21,7 +21,7 @@ t.start = function(){
     Session.set('loopActivityTemplate', "")
 
     if(!(Rooms.findOne({_id:Global.roomId}, {reactive: false}).active)){
-    	Meteor.Router.to('/results/'+Global.roomSlug);
+    	Meteor.Router.to('/results/'+Global.userId);
     }
     else if ( Rooms.findOne({_id:Global.roomId}, {reactive: false}).newFlag != t.seenNewFlag){
     	console.log('new flag!')

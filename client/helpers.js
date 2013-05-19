@@ -81,10 +81,11 @@ $(function () {
       $("#highlighter-confirm").text(html)
     });
 
-  $('body').on('mouseup', '.greater-context', function (e) {
-    console.log(this)
-      $(this).html($(this).data('context').replace($(this).text(), '<p class = "highlit">'+$(this).text()+'</p> '));
-    });
+  $('body').on('mouseup', '.context a', function (e) {
+      console.log($(this).parent())
+      $('.context').html($('.context').data('context').replace($('.context p').text(), '<p class = "highlit">'+$('.context p').text()+'</p> '));
+  });
+
 });
 
 

@@ -1,8 +1,10 @@
 <template name="commentAction">
 
 	<div class="span6 offset3">
-		<blockquote>
-			<p data-context = "{{activity.context}}">{{activity.userHighlighted}}</p>
+		<blockquote class = "context" data-context = "{{activity.context}}">
+				<a>...</a>
+				<p >{{activity.userHighlighted}}</p>
+				<a>...</a>
 		</blockquote>
 		<div class="rubric">
 			<h5 class="push-down">{{structure.question}}</h5>
