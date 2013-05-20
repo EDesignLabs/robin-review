@@ -28,7 +28,7 @@ Template.rubericAction.events = {
 	"click button.next": function (event){
 		Template.loop.complete({
 			choice: $('.btn-radio.active').attr('id'),
-			comment: $('textarea').val();
+			comment: $('textarea').val()
 		})
 	},
 	"click button.show-comment": function (event){
@@ -48,13 +48,16 @@ Template.rubericResult.helpers({
 				for (var j = 0; j < act[i].results.length; j++) {
 					var item = act[i].results[j]
 
+					console.log(item)
+
+					var data = item.comment
+
 					for (var key in item) {
 					  if (item.hasOwnProperty(key)) {
-
 						if (flat[item[key]] == undefined)
-							flat[item[key]] = 1;
+							flat[item[key]] = [data];
 						else
-							flat[item[key]]++;
+							flat[item[key]].push(data);
 
 					  }
 					}

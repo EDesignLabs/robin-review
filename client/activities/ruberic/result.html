@@ -13,14 +13,28 @@
 					<tbody>
 						<tr>
 							<td>
-								<p><b>{{collate.threestarchoice}} people said : </b>&quot;{{this.structure.header}} {{this.structure.threestarchoice}}&quot;</p>
+								<p><b>{{collate.threestarchoice.length}} people said : </b>&quot;{{this.structure.header}} {{this.structure.threestarchoice}}&quot;</p>
+								<ul>
+									{{#each collate.threestarchoice}}
+									    <li>{{this}}</li>
+									{{/each}}
+								</ul>
 							</td>
 							<td>
-								<p><b>{{collate.twostarchoice}} people said : </b>&quot;{{this.structure.header}} {{this.structure.twostarchoice}}&quot;</p>
-
+								<p><b>{{collate.twostarchoice.length}} people said : </b>&quot;{{this.structure.header}} {{this.structure.twostarchoice}}&quot;</p>
+								<ul>
+									{{#each collate.twostarchoice}}
+									    <li>{{this}}</li>
+									{{/each}}
+								</ul>
 							</td>
 							<td>
-								<p><b>{{collate.onestarchoice}}  people said : </b>&quot;{{this.structure.header}} {{this.structure.onestarchoice}}&quot;</p>
+								<p><b>{{collate.onestarchoice.length}}  people said : </b>&quot;{{this.structure.header}} {{this.structure.onestarchoice}}&quot;</p>
+								<ul>
+									{{#each collate.onestarchoice}}
+									    <li>{{this}}</li>
+									{{/each}}
+								</ul>
 							</td>
 						</tr>
 					</tbody>
