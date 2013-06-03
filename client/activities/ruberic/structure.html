@@ -1,31 +1,31 @@
 <template name="rubericStructure">
 
   <hr>
-  Highlight Question?
-  <input placeholder = "What is your thesis?" value = "{{structure.highlight}}"  id = "highlight" type = 'text'></input>
+  <label>What is the highlight question?</label>
+  <textarea class="input-xxlarge" placeholder = "What is your thesis?" value = "{{structure.highlight}}"  id = "highlight" />
 
   <hr>
 
-  Partial that should be asked of completor?
-  <input placeholder = "Thesis is..." value = "{{structure.header}}"  id = "header" type = 'text'></input>
+  <label>What is the partial that should be asked of completor?</label>
+  <textarea class="input-xxlarge" placeholder = "Thesis is..." value = "{{structure.header}}"  id = "header" />
 
   <hr>
 
-  1 star choice?
-  <input placeholder = "uninteresting or vague" value = "{{structure.onestarchoice}}"  id = "onestarchoice" type = 'text'></input>
+  <label>1 star choice<i class="icon star-filled"></i><i class="icon star-unfilled"></i><i class="icon star-unfilled"></i></label>
+  <textarea class="input-xxlarge" placeholder = "uninteresting or vague" value = "{{structure.onestarchoice}}"  id = "onestarchoice" />
 
   <hr>
 
-  2 star choice?
-  <input placeholder = "is somewhat interesting" value = "{{structure.twostarchoice}}"  id = "twostarchoice" type = 'text'></input>
+  <label>2 star choice<i class="icon star-filled"></i><i class="icon star-filled"></i><i class="icon star-unfilled"></i></label>
+  <textarea class="input-xxlarge" placeholder = "is somewhat interesting" value = "{{structure.twostarchoice}}"  id = "twostarchoice" />
 
   <hr>
 
-  3 star choice?
-  <input placeholder = "is strong, interesting, & grabs the reader’s attention" value = "{{structure.threestarchoice}}"  id = "threestarchoice" type = 'text'></input>
+  <label>3 star choice<i class="icon star-filled"></i><i class="icon star-filled"></i><i class="icon star-filled"></i></label>
+  <textarea class="input-xxlarge" placeholder = "is strong, interesting, &amp; grabs the reader’s attention" value = "{{structure.threestarchoice}}"  id = "threestarchoice" />
 
     <hr>
 
-  <button>SAVE</button>
+  <button class="btn-new btn-large">SAVE</button>
 
 </template>

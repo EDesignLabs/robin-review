@@ -1,21 +1,21 @@
 <template name="confirmationStructure">
   <hr>
 
-  Highlight Question?
-  <input placeholder = "What is your thesis?" value = "{{structure.highlight}}"  id = "highlight" type = 'text'></input>
+  <label>What is the highlight question?</label>
+  <textarea class="input-xxlarge" placeholder = "What is your thesis?" value = "{{structure.highlight}}"  id = "highlight" />
 
   <hr>
 
-  Question that should be used for comparision?
-  <input placeholder = "Please highlight the thesis statement" value = "{{structure.question}}"  id = "question" type = 'text'></input>
-  
+  <label>What question that should be used for comparision?</label>
+  <textarea class="input-xxlarge" placeholder = "Please highlight the thesis statement" value = "{{structure.question}}"  id = "question" />
+
   <hr>
 
-  Comparison noun?
-  <input placeholder = "thesis" value = "{{structure.noun}}"  id = "noun" type = 'text'></input>
-  
+  <label>What is the comparison noun?</label>
+  <input class="input-xxlarge" placeholder = "thesis" value = "{{structure.noun}}"  id = "noun" type = 'text'></input>
+
   <hr>
 
-  <button>SAVE</button>
+  <button class="btn-new btn-large">SAVE</button>
 
 </template>

@@ -1,25 +1,25 @@
 <template name="workbook">
 	workbook name:
 
-	<input type="text"><button id="load">LOAD</button>
+	<input type="text"><button class="btn btn-large btn-new btn-newline" id="load">LOAD</button>
 
 	{{#if workbookSlug}}
 		<hr>
-		<button id="add">add</button>
+		<button class="btn btn-new btn-default" id="add">+ Add Activity</button>
 		<hr>
 		{{workbookSlug }}
 
 		<ul>
 			{{#each structures}}
 				<li>
-					{{prettyPrintStructure structureSlug}} 
-					<button class = "edit" data-id = "{{_id}}">edit</button>
-					<button class = "remove" data-id = "{{_id}}">x</button>
+					{{prettyPrintStructure structureSlug}}
+					<button class = "btn btn-mini edit" data-id = "{{_id}}">edit</button>
+					<button class = "btn btn-mini btn-danger remove" data-id = "{{_id}}">remove</button>
 					-
 					{{json this}}
 				</li>
 			{{/each}}
 		</ul>
 	{{/if}}
-  
+
 </template>

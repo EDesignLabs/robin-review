@@ -1,6 +1,6 @@
 <template name="panel">
-  <h1>THe control Panel!</h1>
-  <button id = 'stop'> STOP </button>
+  <h1>Control Panel</h1>
+  <button class="btn btn-large btn-new" id = 'stop'> STOP </button>
 
   <hr>
   {{#constant}}
@@ -15,15 +15,15 @@
 
   <div class="row-fluid">
     <div class="span6 selector">
-      <h1>Users</h1>
+      <h2>Users</h2>
       <ul>
         {{#each users}}
-            <li>{{this.name}} <button class = "boot">boot</button></li>
+            <li>{{this.name}} <button class = "btn btn-danger btn-mini boot">boot</button></li>
         {{/each}}
       </ul>
     </div>
     <div class="span6 selected">
-        <h1> Activity List</h1>
+        <h2> Activity List</h2>
         <ul>
           {{#each activities}}
               {{json this}}
@@ -32,9 +32,9 @@
     </div>
   </div>
 
-  
- 
-  
+
+
+
 </template>
 
 
