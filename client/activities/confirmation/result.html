@@ -1,5 +1,5 @@
 <template name="confirmationResult">
-	<p>In response to: {{this.structure.question}}</p>
-	{{this.result.completorName}} said that they thought this was your {{this.structure.noun}}:
-	<h4>{{this.result.confirmation}}</h4>
+	<p><span class="label label-default push-right">in response to </span> {{this.structure.question}}</p>
+	<p><b>{{this.result.completorName}}</b> thought this was your <b>{{this.structure.noun}}</b> :</p>
+	<p class="result-comment">{{this.result.confirmation}}</p>
 </template>
