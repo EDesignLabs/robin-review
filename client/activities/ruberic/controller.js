@@ -5,7 +5,8 @@ Template.rubericStructure.events = {
 			header: $('input#header').val(),
 			onestarchoice: $('input#onestarchoice').val(),
 			twostarchoice: $('input#twostarchoice').val(),
-			threestarchoice: $('input#threestarchoice').val()
+			threestarchoice: $('input#threestarchoice').val(),
+			fourstarchoice: $('input#fourstarchoice').val()
 		})
 	}
 };

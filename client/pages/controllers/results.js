@@ -24,7 +24,8 @@ t.helpers({
 
 t.events({
 	"click button": function(){
-		console.log('bobsss')
+		$('input').hide()
+		$('button').hide()
 		Meteor.call(
 			'sendEmail',
             $('input').val(),

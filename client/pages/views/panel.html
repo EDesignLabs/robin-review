@@ -1,8 +1,7 @@
 <template name="panel">
-  <h1>THe control Panel!</h1>
-  <button id = 'stop'> STOP </button>
+  <h1>Control Panel</h1>
 
-  <hr>
+  <p> First select a workbook. Hit stop when you want to show the results page</p>
   {{#constant}}
     <select class = "workbook">
       <option value="" style="display:none;"></option>
@@ -12,6 +11,12 @@
     </select>
   {{/constant}}
   <hr>
+
+  <hr>
+  <button id = 'stop'> STOP </button>
+
+  <hr>
+
 
   <div class="row-fluid">
     <div class="span6 selector">
@@ -26,7 +31,7 @@
         <h1> Activity List</h1>
         <ul>
           {{#each activities}}
-              {{json this}}
+              <li>{{this.structure.structureSlug}} created by {{this.userId}}</li>
           {{/each}}
         </ul>
     </div>

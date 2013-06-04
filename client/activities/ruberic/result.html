@@ -13,6 +13,14 @@
 					<tbody>
 						<tr>
 							<td>
+								<p><b>{{collate.fourstarchoice.length}} people said : </b>&quot;{{this.structure.header}} {{this.structure.fourstarchoice}}&quot;</p>
+								<ul>
+									{{#each collate.fourstarchoice}}
+									    <li>{{this}}</li>
+									{{/each}}
+								</ul>
+							</td>
+							<td>
 								<p><b>{{collate.threestarchoice.length}} people said : </b>&quot;{{this.structure.header}} {{this.structure.threestarchoice}}&quot;</p>
 								<ul>
 									{{#each collate.threestarchoice}}
