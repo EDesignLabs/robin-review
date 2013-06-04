@@ -34,13 +34,15 @@ t.start = function(){
 				roomId:Global.roomId,  
 				_id:{$nin:t.seenActivities}, 
 				userId:{$ne:Global.userId}
-			}, {reactive: false}).fetch();
+		}, {reactive: false}).fetch();
 
 		console.log('activities', activities)
 
 		if (activities.length > 0){
 			t.currActivity = activities[Math.floor(Math.random()*activities.length)];
+			t.currStructure = t.currActivity.structure
 			t.seenActivities.push(t.currActivity._id)
+			Helpers.templateRefresh()
 			Session.set('loopActivityTemplate', t.currActivity.structure.structureSlug + "Action")
 			console.log(' t.currActivity',  t.currActivity)
 		}else{
@@ -91,6 +93,8 @@ t.create = function(settings){
 		'userId': Global.userId,
 		'roomId': Global.roomId
 	}
+
+	console.log('Inserting', activity)
 
 	Activities.insert( activity )
 	t.start()

@@ -1,8 +1,8 @@
 Template.confirmationStructure.events = {
 	"click button": function (event){
 		Helpers.updateStructure({
-			highlight: $('input#highlight').val(),
-			question: $('input#question').val(),
+			highlight: $('textarea#highlight').val(),
+			question: $('textarea#question').val(),
 			noun: $('input#noun').val(),
 		})
 	}

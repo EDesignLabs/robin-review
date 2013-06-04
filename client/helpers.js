@@ -1,20 +1,6 @@
-for (var n in Template){
-  Template[n].user = function(){
-    var users = Rooms.findOne({_id:Global.roomId}, {reactive:false} ).users
-    
-    if (users)
-      for (var i = 0; i < users.length; i++) {
-        if (users[i].id == Global.userId)
-          return users[i]
-      };
 
-    console.log('warning no user found.')
-    return undefined
 
-  }
-  Template[n].structure = function(){ return Template.loop.currStructure }
-  Template[n].activity = function(){ return Template.loop.currActivity.settings }
-}
+
 
 Helpers = {
   currentActivity: {},
@@ -36,8 +22,29 @@ Helpers = {
 		Session.set('structureId', undefined)
 
 		Meteor.Router.to('/workbook');
-	}
+	},
+  templateRefresh:function(){
+    for (var n in Template){
+      Template[n].user = function(){
+        var users = Rooms.findOne({_id:Global.roomId}, {reactive:false} ).users
+        
+        if (users)
+          for (var i = 0; i < users.length; i++) {
+            if (users[i].id == Global.userId)
+              return users[i]
+          };
+
+        console.log('warning no user found.')
+        return undefined
+
+      }
+      Template[n].structure = function(){ return Template.loop.currStructure }
+      Template[n].activity = function(){ return Template.loop.currActivity.settings }
+    }
+  }
 }
+
+Helpers.templateRefresh()
 
 //http://stackoverflow.com/questions/14514733/does-meteor-have-a-distinct-query-for-collections
 LocalCollection.Cursor.prototype.distinct = function (key) {

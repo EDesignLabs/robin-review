@@ -1,12 +1,12 @@
 Template.rubericStructure.events = {
 	"click button": function (event){
 		Helpers.updateStructure({
-			highlight: $('input#highlight').val(),
-			header: $('input#header').val(),
-			onestarchoice: $('input#onestarchoice').val(),
-			twostarchoice: $('input#twostarchoice').val(),
-			threestarchoice: $('input#threestarchoice').val(),
-			fourstarchoice: $('input#fourstarchoice').val()
+			highlight: $('textarea#highlight').val(),
+			header: $('textarea#header').val(),
+			onestarchoice: $('textarea#onestarchoice').val(),
+			twostarchoice: $('textarea#twostarchoice').val(),
+			threestarchoice: $('textarea#threestarchoice').val(),
+			fourstarchoice: $('textarea#fourstarchoice').val()
 		})
 	}
 };
