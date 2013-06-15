@@ -1,6 +1,7 @@
 Robin Reveiw
 ============
-A collaborative feedback platform. Robin Review was made with Meteor framework.
+Robin Review exchanges small chunks of a larger text for realtime peer editing and aggregates feedback for learner reflection. 
+Robin Review was made with Meteor framework.
 
 Installation
 ============
