@@ -88,21 +88,25 @@ hr
 
 #top-header
 {
-	height: 70px;
-	padding-top: 8px;
-	text-align: right;
+	width: 107px;
+	margin: 0 20px;
+	float: right;
+	padding: 8px 0;
+	text-align: center;
 }
 	#top-header img{
-		margin-right: 20px;
-		float: right;
-
+		margin: 10px 10px 7px;
+		width: 68px;
 	}
 	#top-header span
 	{
 		color: #280041;
-		font-style: italic;
-		line-height: 70px;
-		font-weight: bold;
+		font-size: 17px;
+	}
+	.clear
+	{
+		display: block;
+		clear: both;
 	}
 
 input, button, select, textarea {
