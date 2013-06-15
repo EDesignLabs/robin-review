@@ -1,4 +1,4 @@
-Robin Reveiw
+Robin Review
 ============
 Robin Review exchanges small chunks of a larger text for realtime peer editing and aggregates feedback for learner reflection. 
 Robin Review was made with Meteor framework.
